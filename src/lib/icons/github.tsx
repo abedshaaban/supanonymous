@@ -1,6 +1,6 @@
 import type { IconType } from '@/lib/types/icons'
 
-export const GithubIcon = (props: IconType) => (
+const GithubIcon = (props: IconType) => (
   <svg
     width="15"
     height="15"
@@ -15,3 +15,5 @@ export const GithubIcon = (props: IconType) => (
     />
   </svg>
 )
+
+export default GithubIcon
