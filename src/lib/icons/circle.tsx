@@ -1,4 +1,4 @@
-import type { IconType } from '@/lib/types/icons'
+import type { IconType } from '~types/icons'
 
 const CircleIcon = (props: IconType) => (
   <svg

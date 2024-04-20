@@ -14,7 +14,7 @@ export function Header() {
         <div className={'mr-4 hidden md:flex'}>
           <Link href="/" className={'mr-6 flex items-center space-x-2'}>
             <CircleIcon className={'h-6 w-6'} />
-            <span className={'text-primary hidden font-bold sm:inline-block'}>
+            <span className={'hidden font-bold text-primary sm:inline-block'}>
               {siteConfig.name}
             </span>
           </Link>

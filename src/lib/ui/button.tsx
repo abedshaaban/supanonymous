@@ -1,8 +1,9 @@
 import { forwardRef, type ButtonHTMLAttributes } from 'react'
-import type { IconType } from '@/lib/types/icons'
-import ThreeQuarteredCircleIcon from '@icons/three-quartered-circle'
-import { cn } from '@utils/index'
+import ThreeQuarteredCircleIcon from '~icons/three-quartered-circle'
+import { cn } from '~utils/index'
 import { cva, type VariantProps } from 'class-variance-authority'
+
+import type { IconType } from '~/lib/types/icons'
 
 const buttonVariants = cva(
   'duration-150 transition-all inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
