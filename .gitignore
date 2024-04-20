@@ -2,6 +2,6 @@ node_modules
 *lock.*
 .next
 build
-.env
+.env.local
 *.tsbuildinfo
 next-env.d.ts
