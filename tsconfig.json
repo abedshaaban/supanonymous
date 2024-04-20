@@ -23,6 +23,7 @@
       "@utils/*": ["./src/lib/utils/*", "./src/lib/utils/index.ts"],
       "@components/*": ["./src/lib/components/*"],
       "@icons/*": ["./src/lib/icons/*"],
+      "@ui/*": ["./src/lib/ui/*"],
       "@constants/*": ["./src/lib/constants/*"]
     }
   },
