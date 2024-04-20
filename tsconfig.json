@@ -18,13 +18,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@styles/*": ["./src/lib/styles/*"],
-      "@utils/*": ["./src/lib/utils/*", "./src/lib/utils/index.ts"],
-      "@components/*": ["./src/lib/components/*"],
-      "@icons/*": ["./src/lib/icons/*"],
-      "@ui/*": ["./src/lib/ui/*"],
-      "@constants/*": ["./src/lib/constants/*"]
+      "~/*": ["./src/*"],
+      "~styles/*": ["./src/lib/styles/*"],
+      "~utils/*": ["./src/lib/utils/*", "./src/lib/utils/index.ts"],
+      "~components/*": ["./src/lib/components/*"],
+      "~icons/*": ["./src/lib/icons/*"],
+      "~ui/*": ["./src/lib/ui/*"],
+      "~constants/*": ["./src/lib/constants/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

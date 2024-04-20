@@ -1,6 +1,6 @@
-import { siteConfig } from '@constants/site-config'
-import CircleIcon from '@icons/circle'
-import { Button } from '@ui/button'
+import { siteConfig } from '~constants/site-config'
+import CircleIcon from '~icons/circle'
+import { Button } from '~ui/button'
 import Link from 'next/link'
 
 export function Header() {
