@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --color-primary-rgb: 0 0 0;
+  --color-primary-rgb: 62 207 142;
+  --color-secondary-rgb: 55 153 107;
 }
 
 @layer utilities {
