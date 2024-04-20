@@ -1,7 +1,6 @@
-import { Header } from '@components/header'
-
 import '@styles/globals.css'
 
+import { Header } from '@components/header'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -16,8 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={'en'}>
-      <Header />
-      <body>{children}</body>
+      <body>
+        <Header />
+
+        <div className={'flex justify-center'}>
+          <div className={'container'}>{children}</div>
+        </div>
+      </body>
     </html>
   )
 }
