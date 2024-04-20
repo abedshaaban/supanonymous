@@ -1,4 +1,4 @@
-import '@styles/globals.css'
+import '~styles/globals.css'
 
 import { Header } from '~components/header'
 import type { Metadata } from 'next'
@@ -19,7 +19,7 @@ export default function RootLayout({
         <Header />
 
         <div className={'flex justify-center'}>
-          <div className={'container'}>{children}</div>
+          <div className={'container px-1'}>{children}</div>
         </div>
       </body>
     </html>
