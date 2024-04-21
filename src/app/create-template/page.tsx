@@ -1,6 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { TEMPLATES } from '~constants/templates'
 import { Button } from '~ui/button'
 import {
   Card,
@@ -12,25 +14,38 @@ import {
 } from '~ui/card'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~ui/form'
 import { Input } from '~ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~ui/select'
+import { generateId } from '~utils/functions/misc.functions'
+import { createClient } from '~utils/supabase/client'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 export default function CreateTemplatePage() {
+  const [errorMessage, setErrorMessage] = useState<string>()
+  const router = useRouter()
+
   const formSchema = z.object({
     name: z.string().min(3).max(50),
-    description: z.string().min(0).max(50).optional(),
-    templateType: z.string().min(0).max(50)
+    description: z.string().min(0).max(50).optional()
   })
 
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {}
+    resolver: zodResolver(formSchema)
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const supabase = createClient()
+
+    const { error } = await supabase.from('templates').insert({
+      ...values,
+      slug: generateId(),
+      template_type: 'COMPLAINTS'
+    })
+
+    if (!error) router.push('/')
+
+    setErrorMessage(error?.message)
   }
 
   return (
@@ -45,6 +60,8 @@ export default function CreateTemplatePage() {
             <CardDescription>
               This will be the form type used for your submitions
             </CardDescription>
+
+            <CardDescription className={'text-red-500'}>{errorMessage}</CardDescription>
           </CardHeader>
 
           <CardContent className={'flex flex-col gap-6'}>
@@ -70,31 +87,6 @@ export default function CreateTemplatePage() {
                   <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Input id="description" placeholder={'Description'} {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name={'templateType'}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Template Type</FormLabel>
-                  <FormControl>
-                    <Select
-                      onValueChange={(e) => {
-                        field.onChange(e)
-                      }}
-                    >
-                      <SelectTrigger id={'templateType'}>
-                        <SelectValue placeholder={'Select'} />
-                      </SelectTrigger>
-                      <SelectContent position="popper">
-                        <SelectItem value="complaints">Anonymous Complaints</SelectItem>
-                      </SelectContent>
-                    </Select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
