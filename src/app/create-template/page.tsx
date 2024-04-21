@@ -1,3 +1,7 @@
+'use client'
+
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Button } from '~ui/button'
 import {
   Card,
   CardContent,
@@ -6,65 +10,107 @@ import {
   CardHeader,
   CardTitle
 } from '~ui/card'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~ui/form'
 import { Input } from '~ui/input'
-import { Label } from '~ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~ui/select'
 import Link from 'next/link'
-
-import { Button } from '~/lib/ui/button'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 export default function CreateTemplatePage() {
-  async function handleCreateTemplate() {
-    'use server'
+  const formSchema = z.object({
+    name: z.string().min(3).max(50),
+    description: z.string().min(0).max(50).optional(),
+    templateType: z.string().min(0).max(50)
+  })
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {}
+  })
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values)
   }
 
   return (
-    <form
-      action={handleCreateTemplate}
-      className={'flex h-[calc(100vh-57px)] w-full items-center justify-center'}
-    >
-      <Card className={'w-full max-w-[350px]'}>
-        <CardHeader>
-          <CardTitle>Create Template</CardTitle>
-          <CardDescription>
-            This will be the form type used for your submitions
-          </CardDescription>
-        </CardHeader>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={'flex h-[calc(100vh-57px)] w-full items-center justify-center'}
+      >
+        <Card className={'w-full max-w-[390px]'}>
+          <CardHeader>
+            <CardTitle>Create Template</CardTitle>
+            <CardDescription>
+              This will be the form type used for your submitions
+            </CardDescription>
+          </CardHeader>
 
-        <CardContent>
-          <div className="grid w-full items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder={'Name of your template'} required />
-            </div>
+          <CardContent className={'flex flex-col gap-6'}>
+            <FormField
+              control={form.control}
+              name={'name'}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input id="name" placeholder={'Name of your template'} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="description">Description</Label>
-              <Input id="description" placeholder={'Description'} />
-            </div>
+            <FormField
+              control={form.control}
+              name={'description'}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Input id="description" placeholder={'Description'} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor={'type'}>Type</Label>
-              <Select required>
-                <SelectTrigger id={'type'}>
-                  <SelectValue placeholder={'Select'} />
-                </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="complaints">Anonymous Complaints</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        </CardContent>
+            <FormField
+              control={form.control}
+              name={'templateType'}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Template Type</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={(e) => {
+                        field.onChange(e)
+                      }}
+                    >
+                      <SelectTrigger id={'templateType'}>
+                        <SelectValue placeholder={'Select'} />
+                      </SelectTrigger>
+                      <SelectContent position="popper">
+                        <SelectItem value="complaints">Anonymous Complaints</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
 
-        <CardFooter className={'flex justify-between'}>
-          <Link href={'/'}>
-            <Button variant={'outline'}>Cancel</Button>
-          </Link>
+          <CardFooter className={'flex justify-between'}>
+            <Link href={'/'}>
+              <Button variant={'outline'}>Cancel</Button>
+            </Link>
 
-          <Button type={'submit'}>Create</Button>
-        </CardFooter>
-      </Card>
-    </form>
+            <Button type={'submit'}>Create</Button>
+          </CardFooter>
+        </Card>
+      </form>
+    </Form>
   )
 }
