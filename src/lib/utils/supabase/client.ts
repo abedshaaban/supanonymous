@@ -4,3 +4,5 @@ import type { Database } from '~types/supabase'
 
 export const createClient = () =>
   createBrowserClient<Database>(ENV.SUPABASE_URL, ENV.SUPABASE_ANON_KEY)
+
+export const supabase = createClient()
