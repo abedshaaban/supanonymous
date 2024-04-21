@@ -3,6 +3,15 @@ import CircleIcon from '~icons/circle'
 import ExitIcon from '~icons/exit'
 import PersonIcon from '~icons/person'
 import { Button } from '~ui/button'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue
+} from '~ui/select'
 import { logoutUser } from '~utils/client/auth-actions'
 import { supabase } from '~utils/supabase/server'
 import Link from 'next/link'
@@ -32,11 +41,14 @@ export async function Header() {
           <nav className={'flex items-center gap-3'}>
             {user ? (
               <>
-                <Link href={'/u'}>
-                  <Button variant={'outline'} size={'icon'}>
-                    <PersonIcon />
-                  </Button>
-                </Link>
+                <Select>
+                  <SelectTrigger className={'w-[210px]'}>
+                    <SelectValue placeholder="Select a timezone" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="est">Eastern Standard Time (EST)</SelectItem>
+                  </SelectContent>
+                </Select>
 
                 <Button variant={'destructive'} onClick={logoutUser} size={'icon'}>
                   <ExitIcon />
