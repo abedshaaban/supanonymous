@@ -2,16 +2,6 @@ import { siteConfig } from '~constants/site-config'
 import CircleIcon from '~icons/circle'
 import ExitIcon from '~icons/exit'
 import PlusIcon from '~icons/plus'
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger
-} from '~ui/alert-dialog'
 import { Button } from '~ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~ui/select'
 import { createClient } from '~utils/supabase/server'
