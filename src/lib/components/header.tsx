@@ -13,9 +13,6 @@ import {
   AlertDialogTrigger
 } from '~ui/alert-dialog'
 import { Button } from '~ui/button'
-import { Card, CardContent, CardFooter } from '~ui/card'
-import { Input } from '~ui/input'
-import { Label } from '~ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~ui/select'
 import { createClient } from '~utils/supabase/server'
 import Link from 'next/link'
@@ -36,12 +33,6 @@ export async function Header() {
     await supabase.auth.signOut()
 
     redirect('/login')
-  }
-
-  async function handleCreateTemplate() {
-    'use server'
-
-    console.log('create template')
   }
 
   return (
