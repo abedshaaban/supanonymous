@@ -15,12 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={'en'}>
-      <body>
+      <body className={'min-h-screen'}>
         <Header />
 
-        <div className={'flex justify-center'}>
-          <div className={'container px-1'}>{children}</div>
-        </div>
+        <div className={'container m-auto px-1'}>{children}</div>
       </body>
     </html>
   )
