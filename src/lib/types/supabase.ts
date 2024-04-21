@@ -12,26 +12,29 @@ export type Database = {
       templates: {
         Row: {
           created_at: string
-          desciption: string | null
+          description: string | null
           id: number
           name: string
           slug: string
+          template_type: Database['public']['Enums']['TEMPLATE_TYPE']
           user_id: string
         }
         Insert: {
           created_at?: string
-          desciption?: string | null
+          description?: string | null
           id?: number
           name: string
           slug: string
+          template_type: Database['public']['Enums']['TEMPLATE_TYPE']
           user_id?: string
         }
         Update: {
           created_at?: string
-          desciption?: string | null
+          description?: string | null
           id?: number
           name?: string
           slug?: string
+          template_type?: Database['public']['Enums']['TEMPLATE_TYPE']
           user_id?: string
         }
         Relationships: [
@@ -52,7 +55,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      TEMPLATE_TYPE: 'COMPLAINTS'
     }
     CompositeTypes: {
       [_ in never]: never
