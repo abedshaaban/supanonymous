@@ -1,25 +1,20 @@
 import { siteConfig } from '~constants/site-config'
 import CircleIcon from '~icons/circle'
 import ExitIcon from '~icons/exit'
-import PersonIcon from '~icons/person'
 import { Button } from '~ui/button'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue
-} from '~ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~ui/select'
 import { logoutUser } from '~utils/client/auth-actions'
-import { supabase } from '~utils/supabase/server'
+import { createClient } from '~utils/supabase/server'
 import Link from 'next/link'
 
 export async function Header() {
+  const supabase = createClient()
+
   const {
     data: { user }
   } = await supabase.auth.getUser()
+
+  console.log(user)
 
   return (
     <header
