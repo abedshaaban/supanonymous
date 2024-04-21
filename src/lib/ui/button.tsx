@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef, type ButtonHTMLAttributes } from 'react'
 import ThreeQuarteredCircleIcon from '~icons/three-quartered-circle'
 import { cn } from '~utils/index'
