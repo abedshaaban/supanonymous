@@ -1,7 +1,21 @@
 import { siteConfig } from '~constants/site-config'
 import CircleIcon from '~icons/circle'
 import ExitIcon from '~icons/exit'
+import PlusIcon from '~icons/plus'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from '~ui/alert-dialog'
 import { Button } from '~ui/button'
+import { Card, CardContent, CardFooter } from '~ui/card'
+import { Input } from '~ui/input'
+import { Label } from '~ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~ui/select'
 import { createClient } from '~utils/supabase/server'
 import Link from 'next/link'
@@ -22,6 +36,12 @@ export async function Header() {
     await supabase.auth.signOut()
 
     redirect('/login')
+  }
+
+  async function handleCreateTemplate() {
+    'use server'
+
+    console.log('create template')
   }
 
   return (
@@ -46,10 +66,20 @@ export async function Header() {
               <>
                 <Select>
                   <SelectTrigger className={'w-[210px]'}>
-                    <SelectValue placeholder="Select a timezone" />
+                    <SelectValue placeholder={'Select Template'} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="est">Eastern Standard Time (EST)</SelectItem>
+                    <SelectItem value={'est'}>Eastern Standard Time (EST)</SelectItem>
+
+                    <Link
+                      href={'/create-template'}
+                      className={
+                        'flex items-center gap-2 rounded-sm py-1.5 pl-2 pr-8 text-sm font-semibold hover:bg-gray-100'
+                      }
+                    >
+                      <PlusIcon />
+                      Create Template
+                    </Link>
                   </SelectContent>
                 </Select>
 
