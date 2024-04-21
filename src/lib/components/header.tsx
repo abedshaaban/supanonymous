@@ -3,9 +3,9 @@ import CircleIcon from '~icons/circle'
 import ExitIcon from '~icons/exit'
 import { Button } from '~ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~ui/select'
-import { logoutUser } from '~utils/client/auth-actions'
 import { createClient } from '~utils/supabase/server'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 export async function Header() {
   const supabase = createClient()
@@ -14,7 +14,15 @@ export async function Header() {
     data: { user }
   } = await supabase.auth.getUser()
 
-  console.log(user)
+  async function handleLogoutUser() {
+    'use server'
+
+    const supabase = createClient()
+
+    await supabase.auth.signOut()
+
+    redirect('/login')
+  }
 
   return (
     <header
@@ -45,9 +53,11 @@ export async function Header() {
                   </SelectContent>
                 </Select>
 
-                <Button variant={'destructive'} onClick={logoutUser} size={'icon'}>
-                  <ExitIcon />
-                </Button>
+                <form action={handleLogoutUser}>
+                  <Button variant={'destructive'} size={'icon'} type={'submit'}>
+                    <ExitIcon />
+                  </Button>
+                </form>
               </>
             ) : (
               <>
