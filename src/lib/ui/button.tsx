@@ -2,7 +2,7 @@
 
 import { forwardRef, type ButtonHTMLAttributes } from 'react'
 import ThreeQuarteredCircleIcon from '~icons/three-quartered-circle'
-import { cn } from '~utils/index'
+import { cn } from '~utils/functions/misc.functions'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import type { IconType } from '~/lib/types/icons'
